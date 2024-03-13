@@ -11,7 +11,7 @@ class LessonSerializer(serializers.ModelSerializer):
 
 
 class CourseSerializer(serializers.ModelSerializer):
-
+    lesson = LessonSerializer(read_only=True, many=True)
     quantity_lessons = serializers.SerializerMethodField()
 
     def get_quantity_lessons(self, obj):
@@ -26,4 +26,4 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = ('title', 'description', 'image_preview', 'quantity_lessons', 'lesson',)

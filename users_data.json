@@ -1,0 +1,170 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "date_joined": "2024-03-05T10:59:07.476Z",
+      "email": "ivanov@mail.com",
+      "first_name": "Ivan",
+      "last_name": "Ivanov",
+      "phone": null,
+      "country": null,
+      "avatar": "",
+      "is_active": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "date_joined": "2024-03-05T11:16:12.961Z",
+      "email": "volgin@pochta.com",
+      "first_name": "Vova",
+      "last_name": "Volgin",
+      "phone": null,
+      "country": null,
+      "avatar": "",
+      "is_active": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 11,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "is_staff": false,
+      "date_joined": "2024-03-05T11:17:25.868Z",
+      "email": "petrov@pocta.com",
+      "first_name": "Petr",
+      "last_name": "Petrov",
+      "phone": null,
+      "country": null,
+      "avatar": "",
+      "is_active": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date_pay": "2011-01-11",
+      "amount_payment": 15000,
+      "method_payment": "CASH",
+      "course": 1,
+      "lesson": null
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "date_pay": "2011-02-11",
+      "amount_payment": 20000,
+      "method_payment": "CASH",
+      "course": 2,
+      "lesson": null
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 3,
+    "fields": {
+      "user": 1,
+      "date_pay": "2012-03-11",
+      "amount_payment": 80000,
+      "method_payment": "NON_CASH",
+      "course": 3,
+      "lesson": null
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 4,
+    "fields": {
+      "user": 10,
+      "date_pay": "2012-05-09",
+      "amount_payment": 18000,
+      "method_payment": "NON_CASH",
+      "course": 1,
+      "lesson": null
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 5,
+    "fields": {
+      "user": 10,
+      "date_pay": "2012-06-11",
+      "amount_payment": 2000,
+      "method_payment": "CASH",
+      "course": null,
+      "lesson": 3
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 6,
+    "fields": {
+      "user": 10,
+      "date_pay": "2012-07-15",
+      "amount_payment": 22000,
+      "method_payment": "CASH",
+      "course": 3,
+      "lesson": null
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 7,
+    "fields": {
+      "user": 11,
+      "date_pay": "2015-02-02",
+      "amount_payment": 25000,
+      "method_payment": "CASH",
+      "course": 1,
+      "lesson": null
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 8,
+    "fields": {
+      "user": 11,
+      "date_pay": "2016-02-09",
+      "amount_payment": 2000,
+      "method_payment": "NON_CASH",
+      "course": null,
+      "lesson": 3
+    }
+  },
+  {
+    "model": "users.payment",
+    "pk": 9,
+    "fields": {
+      "user": 11,
+      "date_pay": "2016-06-12",
+      "amount_payment": 4000,
+      "method_payment": "CASH",
+      "course": null,
+      "lesson": 5
+    }
+  }
+]
