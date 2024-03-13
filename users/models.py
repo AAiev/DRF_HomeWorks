@@ -34,3 +34,15 @@ class Payment(models.Model):
     method_payment = models.CharField(max_length=50, choices=PAYMENT_METHOD, verbose_name='метод оплаты')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='payment', verbose_name='оплаченный курс', **NULLABLE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='payment', verbose_name='оплаченный урок', **NULLABLE)
+
+
+    def __str__(self):
+        return f'Дата: {self.date_pay},' \
+               f'Суммма: {self.amount_payment},' \
+               f'Метод оплаты: {self.method_payment},' \
+               f'За {self.course if self.course else self.lesson}.'
+
+    class Meta:
+        verbose_name = 'оплата'
+        verbose_name_plural = 'оплаты'
+        ordering = ('-date_pay',)
