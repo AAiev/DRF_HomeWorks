@@ -20,6 +20,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+
 class Payment(models.Model):
 
     PAYMENT_METHOD = [
@@ -33,4 +34,3 @@ class Payment(models.Model):
     method_payment = models.CharField(max_length=50, choices=PAYMENT_METHOD, verbose_name='метод оплаты')
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='payment', verbose_name='оплаченный курс', **NULLABLE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='payment', verbose_name='оплаченный урок', **NULLABLE)
-
