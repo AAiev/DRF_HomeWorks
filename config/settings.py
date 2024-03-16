@@ -87,7 +87,11 @@ DATABASES = {
         'USER': os.getenv('USER_DB'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST', '127.0.0.1'),
-        'PORT': os.getenv('DB_PORT', '5432')
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'client_encoding': 'utf-8'
+        },
+
     }
 }
 
