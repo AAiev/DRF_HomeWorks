@@ -16,12 +16,10 @@ class CourseSerializer(serializers.ModelSerializer):
 
     def get_quantity_lessons(self, obj):
         """вывод количества уроков"""
-        quantity_lessons = obj.lesson.all()
-        if not quantity_lessons:
-            return None
-        else:
-            return len(quantity_lessons)
+        quantity_lessons = obj.lesson.all().count()
+        return quantity_lessons
+
 
     class Meta:
         model = Course
-        fields = ('title', 'description', 'image_preview', 'quantity_lessons', 'lesson',)
+        fields = ('id', 'title', 'description', 'image_preview', 'quantity_lessons', 'lesson',)
