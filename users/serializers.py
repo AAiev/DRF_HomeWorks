@@ -4,7 +4,6 @@ from django.contrib.auth.hashers import make_password
 from users.models import User, Payment
 
 
-
 class PaymentSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -19,7 +18,6 @@ class UserRegisterSerializer(serializers.ModelSerializer):
     def validate_password(self, value: str) -> str:
         """
         Hash value passed by user.
-
         :param value: password of a user
         :return: a hashed version of the password
         """

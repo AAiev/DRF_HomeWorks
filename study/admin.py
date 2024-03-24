@@ -14,4 +14,3 @@ class StudentAdmin(admin.ModelAdmin):
     list_display = ('pk', 'title', 'description', 'course',)
     list_filter = ('course',)
     search_fields = ('title', 'course',)
-

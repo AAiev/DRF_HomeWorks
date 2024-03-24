@@ -17,7 +17,6 @@ class UserListAPIView(generics.ListAPIView):
     queryset = User.objects.all()
 
 
-
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -39,5 +38,3 @@ class PaymentListAPIView(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_fields = ('course', 'lesson', 'method_payment')
     ordering_fields = ['date_pay']
-
-

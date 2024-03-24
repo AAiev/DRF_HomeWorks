@@ -19,7 +19,6 @@ class CourseSerializer(serializers.ModelSerializer):
         quantity_lessons = obj.lesson.all().count()
         return quantity_lessons
 
-
     class Meta:
         model = Course
         fields = ('id', 'title', 'description', 'image_preview', 'quantity_lessons', 'lesson',)

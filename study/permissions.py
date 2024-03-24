@@ -13,6 +13,7 @@ class IsStudentAllowViewLessonOrCourse(BasePermission):
     """
 
     massage = "У вас нет прав для просмотра данной страницы"
+
     def has_object_permission(self, request, view, obj):
         if obj in Lesson.objects.all():
             for p in request.user.payment.all():
@@ -36,8 +37,10 @@ class IsModerator(BasePermission):
             return True
         return False
 
+
 class IsStaff(BasePermission):
     massage = "У вас нет прав для просмотра данной страницы"
+
     def has_permission(self, request, view):
         if request.user.is_staff:
             return True
