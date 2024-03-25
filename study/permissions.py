@@ -36,12 +36,3 @@ class IsModerator(BasePermission):
         if request.user.user_groups == UserGroups.MODERATOR:
             return True
         return False
-
-
-class IsStaff(BasePermission):
-    massage = "У вас нет прав для просмотра данной страницы"
-
-    def has_permission(self, request, view):
-        if request.user.is_staff:
-            return True
-        return False
