@@ -19,9 +19,9 @@ class IsStudentOwnerMaterial(BasePermission):
                 if p in obj.payment.all():
                     return True
 
+
 class IsModerator(BasePermission):
     massage = "У вас нет прав для просмотра данной страницы"
 
     def has_permission(self, request, view):
         return request.user.user_groups == UserGroups.MODERATOR
-
