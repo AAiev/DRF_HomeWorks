@@ -46,15 +46,18 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserListSerializer(UserSerializer):
+class UserListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['first_name', 'phone', 'country', 'avatar',]
+        fields = ['first_name', 'phone',
+                  'country', 'avatar',]
 
 
 class UserRetrieveSerializer(UserSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'password', 'first_name', 'last_name', 'payment', 'phone', 'country', 'avatar',]
+        fields = ['email', 'password', 'first_name',
+                  'last_name', 'payment', 'phone',
+                  'country', 'avatar']

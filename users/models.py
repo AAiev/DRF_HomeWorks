@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _tr
 
-from study.models import Course, Lesson
+from materials.models import Course, Lesson
 
 
 NULLABLE: dict[str, bool] = {'blank': True, 'null': True}
@@ -10,13 +10,12 @@ NULLABLE: dict[str, bool] = {'blank': True, 'null': True}
 
 class UserGroups(models.TextChoices):
 
-    STUDENT = 'Student', _tr('Student')
+    MEMBER = 'Member', _tr('Member')
     MODERATOR = 'Moderator', _tr('Moderator')
 
 
 class User(AbstractUser):
     username = None
-
     email = models.EmailField(unique=True, verbose_name='почта')
 
     first_name = models.CharField(max_length=50, verbose_name='имя')
@@ -27,8 +26,7 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=False)
     user_groups = models.CharField(verbose_name='группа пользователя',
                                    choices=UserGroups.choices,
-                                   max_length=10,
-                                   default=UserGroups.STUDENT)
+                                   max_length=10, default='Member')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
