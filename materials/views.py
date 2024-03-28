@@ -1,9 +1,9 @@
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAdminUser
 
-from study.models import Course, Lesson
-from study.serializers import CourseSerializer, LessonSerializer
-from study.permissions import IsModerator, IsStudentAllowViewLessonOrCourse
+from materials.models import Course, Lesson
+from materials.serializers import CourseSerializer, LessonSerializer
+from materials.permissions import IsModerator, IsStudentOwnerMaterial
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -16,11 +16,11 @@ class CourseViewSet(viewsets.ModelViewSet):
         elif self.action == 'list':
             self.permission_classes = [IsModerator]
         elif self.action == 'retrieve':
-            self.permission_classes = [IsModerator | IsStudentAllowViewLessonOrCourse]
+            self.permission_classes = [IsModerator | IsStudentOwnerMaterial]
         elif self.action == 'update':
-            self.permission_classes = [IsModerator | IsStudentAllowViewLessonOrCourse]
+            self.permission_classes = [IsModerator | IsStudentOwnerMaterial]
         elif self.action == 'destroy':
-            self.permission_classes = [IsStudentAllowViewLessonOrCourse]
+            self.permission_classes = [IsStudentOwnerMaterial]
 
         return [permission() for permission in self.permission_classes]
 
@@ -39,16 +39,16 @@ class LessonListAPIView(generics.ListAPIView):
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = [IsModerator | IsStudentAllowViewLessonOrCourse]
+    permission_classes = [IsModerator | IsStudentOwnerMaterial]
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = [IsModerator | IsStudentAllowViewLessonOrCourse]
+    permission_classes = [IsModerator | IsStudentOwnerMaterial]
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = [IsStudentAllowViewLessonOrCourse]
+    permission_classes = [IsStudentOwnerMaterial]

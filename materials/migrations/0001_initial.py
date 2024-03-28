@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(verbose_name='Описание')),
                 ('image', models.ImageField(blank=True, null=True, upload_to='product_image/', verbose_name='Изображение')),
                 ('url_video', models.URLField(blank=True, null=True, verbose_name='ссылка на видео')),
-                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='study.course')),
+                ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='materials.course')),
             ],
             options={
                 'verbose_name': 'урок',

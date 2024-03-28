@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('study', '0002_alter_lesson_course'),
+        ('materials', '0002_alter_lesson_course'),
         ('users', '0002_remove_user_username_user_avatar_user_country_and_more'),
     ]
 
@@ -20,8 +20,8 @@ class Migration(migrations.Migration):
                 ('date_pay', models.DateField(verbose_name='дата оплаты')),
                 ('amount_payment', models.PositiveIntegerField(verbose_name='сумма оплаты')),
                 ('method_payment', models.CharField(choices=[('CASH', 'наличные'), ('NON_CASH', 'перевод на счет')], max_length=50, verbose_name='метод оплаты')),
-                ('course', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='payment', to='study.course', verbose_name='оплаченный курс')),
-                ('lesson', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='payment', to='study.lesson', verbose_name='оплаченный урок')),
+                ('course', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='payment', to='materials.course', verbose_name='оплаченный курс')),
+                ('lesson', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='payment', to='materials.lesson', verbose_name='оплаченный урок')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='payment', to=settings.AUTH_USER_MODEL)),
             ],
         ),

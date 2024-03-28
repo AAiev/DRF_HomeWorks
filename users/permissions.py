@@ -3,15 +3,15 @@ from rest_framework.permissions import BasePermission
 from users.models import UserGroups
 
 
-class IsStudentReadList(BasePermission):
+class IsMember(BasePermission):
+    massage = "У вас нет прав для просмотра данной страницы"
+
     def has_permission(self, request, view):
-        if request.user.user_groups == UserGroups.STUDENT:
-            return True
-        return False
+        return request.user.user_groups == UserGroups.MEMBER
 
 
-class IsStudentOwner(BasePermission):
+class IsMemberOwnerProfile(BasePermission):
+    massage = "У вас нет прав для просмотра данной страницы"
+
     def has_object_permission(self, request, view, obj):
-        if request.user == obj:
-            return True
-        return False
+        return request.user == obj
