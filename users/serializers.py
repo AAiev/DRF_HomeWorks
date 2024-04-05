@@ -61,3 +61,9 @@ class UserRetrieveSerializer(UserSerializer):
         fields = ['email', 'password', 'first_name',
                   'last_name', 'payment', 'phone',
                   'country', 'avatar']
+
+
+class SubscribeToUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = '__all__'
