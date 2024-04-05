@@ -76,9 +76,9 @@ class SubscribeToUpdate(models.Model):
     is_active = models.BooleanField(default=False, verbose_name='подписка на обновление')
 
     def __str__(self):
-        return (f'Пользователь: {self.user.first_name} {self.user.last_name}'
-                f'{self.course.title}'
-                f'Активна: {self.is_active}')
+        return (f'Пользователь: {self.user.first_name} {self.user.last_name}\n'
+                f'{self.course.title}\n'
+                f'Активна: {self.is_active}\n')
 
     class Meta:
         verbose_name = 'подписка на обновление'
