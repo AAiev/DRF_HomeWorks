@@ -1,6 +1,6 @@
 from rest_framework import viewsets, generics
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, AllowAny
 from rest_framework.response import Response
 
 from materials.models import Course, Lesson
@@ -24,26 +24,36 @@ class CourseViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == 'create':
-            self.permission_classes = [IsAdminUser]
+            # self.permission_classes = [IsAdminUser]
+            self.permission_classes = [AllowAny]
         elif self.action == 'list':
-            self.permission_classes = [IsModerator]
+            # self.permission_classes = [IsModerator]
+            self.permission_classes = [AllowAny]
         elif self.action == 'retrieve':
-            self.permission_classes = [IsModerator | IsStudentOwnerMaterial]
+            # self.permission_classes = [IsModerator | IsStudentOwnerMaterial]
+            self.permission_classes = [AllowAny]
         elif self.action == 'update':
-            self.permission_classes = [IsModerator | IsStudentOwnerMaterial]
+            # self.permission_classes = [IsModerator | IsStudentOwnerMaterial]
+            self.permission_classes = [AllowAny]
         elif self.action == 'destroy':
-            self.permission_classes = [IsStudentOwnerMaterial]
+            # self.permission_classes = [IsStudentOwnerMaterial | AllowAny]
+            self.permission_classes = [AllowAny]
+
 
         return [permission() for permission in self.permission_classes]
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonSerializer
-    permission_classes = [IsAdminUser | IsStudentOwnerMaterial]
+    # permission_classes = [IsAdminUser | IsStudentOwnerMaterial]
+    permission_classes = [AllowAny]
 
 
 class LessonListAPIView(generics.ListAPIView):
-    permission_classes = [IsModerator]
+    # permission_classes = [IsModerator]
+    permission_classes = [AllowAny]
+
+
     pagination_class = CourseLessonPaginations
 
     def get(self, request, **kwargs):
@@ -56,19 +66,23 @@ class LessonListAPIView(generics.ListAPIView):
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = [IsModerator | IsStudentOwnerMaterial]
+    # permission_classes = [IsModerator | IsStudentOwnerMaterial]
+    permission_classes = [AllowAny]
+
 
 
 class LessonUpdateAPIView(generics.UpdateAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = [IsModerator | IsStudentOwnerMaterial]
+    # permission_classes = [IsModerator | IsStudentOwnerMaterial]
+    permission_classes = [AllowAny]
 
 
 class LessonDestroyAPIView(generics.DestroyAPIView):
     serializer_class = LessonSerializer
     queryset = Lesson.objects.all()
-    permission_classes = [IsStudentOwnerMaterial]
+    # permission_classes = [IsStudentOwnerMaterial]
+    permission_classes = [AllowAny]
 
 
 class SubscribeToUpdateAPIView(generics.UpdateAPIView):
