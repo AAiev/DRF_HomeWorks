@@ -2,13 +2,20 @@ from rest_framework import serializers
 
 from django.contrib.auth.hashers import make_password
 
-from users.models import User, Payment
+from users.models import User, Payment, SubscribeToUpdate
 
 
 class PaymentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Payment
+        fields = '__all__'
+
+
+class SubscribeToUpdateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = SubscribeToUpdate
         fields = '__all__'
 
 
@@ -31,6 +38,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     payment = PaymentSerializer(read_only=True, many=True)
+    subscribe = SubscribeToUpdateSerializer(read_only=True, many=True)
 
     def validate_password(self, value: str) -> str:
         """
@@ -60,4 +68,4 @@ class UserRetrieveSerializer(UserSerializer):
         model = User
         fields = ['email', 'password', 'first_name',
                   'last_name', 'payment', 'phone',
-                  'country', 'avatar']
+                  'country', 'avatar', 'subscribe',]
