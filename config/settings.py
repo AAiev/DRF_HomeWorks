@@ -25,6 +25,8 @@ load_dotenv(BASE_DIR / '.env')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+STRIPE_API_KEY = 'sk_test_51P5sgTRpFYbGPfRPe7a3UHF9Utm0KwVSMDRbl1IItfajgnc5IbXRubCG7ghw4MX0bZKSHjYohuH56F9QuRn0h6dI00aqNudA3W'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -40,8 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
+    'drf_yasg',
+
     'django_filters',
     'users',
     'materials',
@@ -56,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -150,3 +156,9 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=50),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1)
 }
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000', # адрес фронтенд-сервера
+]
+
+CORS_ALLOW_ALL_ORIGINS = False

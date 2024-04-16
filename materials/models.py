@@ -9,6 +9,10 @@ class Course(models.Model):
     description = models.TextField(verbose_name='описание')
     image_preview = models.ImageField(verbose_name='превью-картинка', upload_to='image/', **NULLABLE)
 
+    price = models.PositiveIntegerField(default=4000, verbose_name='цена за курс')
+    price_id = models.CharField(max_length=100, **NULLABLE)
+    product_id = models.CharField(max_length=100, **NULLABLE)
+
     class Meta:
         verbose_name = 'курс'
         verbose_name_plural = 'курсы'
