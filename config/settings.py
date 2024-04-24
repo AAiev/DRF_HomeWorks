@@ -25,7 +25,8 @@ load_dotenv(BASE_DIR / '.env')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-STRIPE_API_KEY = 'sk_test_51P5sgTRpFYbGPfRPe7a3UHF9Utm0KwVSMDRbl1IItfajgnc5IbXRubCG7ghw4MX0bZKSHjYohuH56F9QuRn0h6dI00aqNudA3W'
+STRIPE_API_KEY = ('sk_test_51P5sgTRpFYbGPfRPe7a3UHF9Utm0KwVSMDRbl1IItfa'
+                  'jgnc5IbXRubCG7ghw4MX0bZKSHjYohuH56F9QuRn0h6dI00aqNudA3W')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'django_celery_beat',
 
     'django_filters',
     'users',
@@ -158,7 +160,34 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000', # адрес фронтенд-сервера
+    'http://localhost:8000',  # адрес фронтенд-сервера
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
+
+# Настройки для Celery
+CELERY_TIMEZONE = TIME_ZONE     # Часовой пояс для работы Celery
+CELERY_TASK_TRACK_STARTED = True        # Флаг отслеживания выполнения задач
+CELERY_TASK_TIME_LIMIT = 30 * 60        # Максимальное время на выполнение задачи
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")        # URL-адрес брокера сообщений
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")       # URL-адрес брокера результатов, также Redis
+
+# Настройки для Celery
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'users.tasks.deactivation_user_after_few_days',  # Путь к задаче
+        'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}
+
+# Настройка smtp
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = BASE_DIR.joinpath('email-messages')
