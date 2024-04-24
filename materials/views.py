@@ -11,6 +11,7 @@ from materials.permissions import IsModerator, IsStudentOwnerMaterial
 from materials.services import StripeAPI
 from users.models import SubscribeToUpdate
 from users.serializers import SubscribeToUpdateSerializer
+from users.tasks import sending_email_about_update
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -41,6 +42,10 @@ class CourseViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsStudentOwnerMaterial | AllowAny]
             # self.permission_classes = [AllowAny]
         return [permission() for permission in self.permission_classes]
+
+    def perform_update(self, serializer):
+        course = serializer.save()
+        sending_email_about_update.delay(course.pk)
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
@@ -108,7 +113,6 @@ class SubscribeToUpdateAPIView(generics.UpdateAPIView):
             subs_item[0].is_active = True
             message = 'Подписка добавлена'
             subs_item[0].save()
-
         return Response(message)
 
 
