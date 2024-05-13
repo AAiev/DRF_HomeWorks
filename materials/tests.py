@@ -9,7 +9,7 @@ from users.models import User, SubscribeToUpdate
 class MaterialsTestCase(APITestCase):
 
     def setUp(self):
-        self.user = User.objects.create(email='test@test.test', password='123', first_name='FNAME', last_name='LNAME')
+        self.user = User.objects.create(email='test@test.test', password='123', first_name='FNAME', last_name='LNAME', is_active=True, )
         self.client = APIClient()
         self.client.force_authenticate(user=self.user)
         self.course = Course.objects.create(
